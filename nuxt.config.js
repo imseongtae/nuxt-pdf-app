@@ -17,7 +17,10 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    // 모듈 테스트, https://www.npmjs.com/package/vue-pdf
+    { src: '~/plugins/vue-pdf.js', mode: 'client' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -51,6 +54,20 @@ export default {
           exclude: /(node_modules)/,
         });
       }
+
+      // url-loader
+      // if (ctx.isClient) {
+      //   config.output.globalObject = 'this';
+      //   config.module.rules.push({
+      //     test: /\.pdf$/,
+      //     loader: 'url-loader',
+      //   });
+      // }
+      config.output.globalObject = 'this';
+      config.module.rules.push({
+        test: /\.pdf$/,
+        loader: 'url-loader',
+      });
     },
   },
 };
